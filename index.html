@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maruti Suzuki ARENA - Price List & On-Road Calculator 2026</title>
+    <style>
+        :root {
+            --arena-blue: #003399;
+            --arena-orange: #ff6600;
+            --bg-light: #f4f6f9;
+            --text-dark: #222222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--arena-blue), #001a4d);
+            color: #ffffff;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--arena-orange);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 5px;
+        }
+
+        .form-section {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background-color: #fff;
+        }
+
+        select:focus {
+            border-color: var(--arena-blue);
+        }
+
+        .price-breakdown {
+            margin-top: 25px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #cccccc;
+            font-size: 0.98rem;
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+        }
+
+        .price-row.total {
+            border-top: 2px solid var(--arena-blue);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--arena-blue);
+            padding-top: 15px;
+            margin-top: 5px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--arena-orange);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>MARUTI SUZUKI ARENA</h1>
+        <p>Price List & On-Road Estimator (2026)</p>
+    </div>
+
+    <div class="form-section">
+        <div class="form-group">
+            <label for="carModel">Select Car Model</label>
+            <select id="carModel" onchange="updateVariants()">
+                <option value="">-- Choose Model --</option>
+                <option value="alto">Alto K10</option>
+                <option value="wagonr">Wagon R</option>
+                <option value="swift">Swift</option>
+                <option value="dzire">Dzire</option>
+                <option value="brezza">Brezza</option>
+                <option value="ertiga">Ertiga</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="carVariant">Select Variant</label>
+            <select id="carVariant" onchange="calculatePrice()" disabled>
+                <option value="">-- Choose Model First --</option>
+            </select>
+        </div>
+
+        <div class="price-breakdown">
+            <div class="price-row">
+                <span>Ex-Showroom Price</span>
+                <span id="exShowroom">₹0</span>
+            </div>
+            <div class="price-row">
+                <span>RTO / Registration (Est. 10%)</span>
+                <span id="rto">₹0</span>
+            </div>
+            <div class="price-row">
+                <span>Insurance (Comprehensive)</span>
+                <span id="insurance">₹0</span>
+            </div>
+            <div class="price-row">
+                <span>Fastag & Mandatory Accessories</span>
+                <span id="other">₹2,500</span>
+            </div>
+            <div class="price-row total">
+                <span>Estimated On-Road Price</span>
+                <span id="totalPrice">₹0</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const vehicleData = {
+        alto: [
+            { name: "Std (Petrol)", price: 399000 },
+            { name: "LXi (Petrol)", price: 483000 },
+            { name: "VXi (Petrol)", price: 506000 },
+            { name: "VXi+ (Petrol)", price: 535000 },
+            { name: "LXi (CNG)", price: 573000 },
+            { name: "VXi (CNG)", price: 596000 }
+        ],
+        wagonr: [
+            { name: "LXi 1.0L (Petrol)", price: 554000 },
+            { name: "VXi 1.0L (Petrol)", price: 599000 },
+            { name: "ZXi 1.2L (Petrol)", price: 628000 },
+            { name: "ZXi+ 1.2L (Petrol)", price: 675000 },
+            { name: "LXi 1.0L (CNG)", price: 644000 },
+            { name: "VXi 1.0L (CNG)", price: 689000 }
+        ],
+        swift: [
+            { name: "LXi (Petrol)", price: 649000 },
+            { name: "VXi (Petrol)", price: 729000 },
+            { name: "VXi (O) (Petrol)", price: 756000 },
+            { name: "ZXi (Petrol)", price: 829000 },
+            { name: "ZXi+ (Petrol)", price: 899000 },
+            { name: "VXi (CNG)", price: 819000 },
+            { name: "ZXi (CNG)", price: 919000 }
+        ],
+        dzire: [
+            { name: "LXi (Petrol)", price: 679000 },
+            { name: "VXi (Petrol)", price: 779000 },
+            { name: "ZXi (Petrol)", price: 889000 },
+            { name: "ZXi+ (Petrol)", price: 939000 },
+            { name: "VXi (CNG)", price: 874000 },
+            { name: "ZXi (CNG)", price: 984000 }
+        ],
+        brezza: [
+            { name: "LXi (Petrol)", price: 834000 },
+            { name: "VXi (Petrol)", price: 969000 },
+            { name: "ZXi (Petrol)", price: 1114000 },
+            { name: "ZXi+ (Petrol)", price: 1258000 },
+            { name: "LXi (CNG)", price: 929000 },
+            { name: "VXi (CNG)", price: 1064000 },
+            { name: "ZXi (CNG)", price: 1209000 }
+        ],
+        ertiga: [
+            { name: "LXi (Petrol)", price: 869000 },
+            { name: "VXi (Petrol)", price: 983000 },
+            { name: "ZXi (Petrol)", price: 1093000 },
+            { name: "ZXi+ (Petrol)", price: 1203000 },
+            { name: "VXi (CNG)", price: 1078000 },
+            { name: "ZXi (CNG)", price: 1188000 }
+        ]
+    };
+
+    function updateVariants() {
+        const modelSelect = document.getElementById("carModel");
+        const variantSelect = document.getElementById("carVariant");
+        const selectedModel = modelSelect.value;
+
+        variantSelect.innerHTML = '<option value="">-- Select Variant --</option>';
+
+        if (selectedModel && vehicleData[selectedModel]) {
+            vehicleData[selectedModel].forEach((variant, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = `${variant.name} - ₹${variant.price.toLocaleString('en-IN')}`;
+                variantSelect.appendChild(option);
+            });
+            variantSelect.disabled = false;
+        } else {
+            variantSelect.disabled = true;
+        }
+        resetPrices();
+    }
+
+    function calculatePrice() {
+        const modelSelect = document.getElementById("carModel").value;
+        const variantIndex = document.getElementById("carVariant").value;
+
+        if (modelSelect && variantIndex !== "") {
+            const exShowroom = vehicleData[modelSelect][variantIndex].price;
+            const rto = Math.round(exShowroom * 0.10);
+            const insurance = Math.round(exShowroom * 0.045);
+            const other = 2500;
+            const total = exShowroom + rto + insurance + other;
+
+            document.getElementById("exShowroom").textContent = "₹" + exShowroom.toLocaleString('en-IN');
+            document.getElementById("rto").textContent = "₹" + rto.toLocaleString('en-IN');
+            document.getElementById("insurance").textContent = "₹" + insurance.toLocaleString('en-IN');
+            document.getElementById("other").textContent = "₹" + other.toLocaleString('en-IN');
+            document.getElementById("totalPrice").textContent = "₹" + total.toLocaleString('en-IN');
+        } else {
+            resetPrices();
+        }
+    }
+
+    function resetPrices() {
+        document.getElementById("exShowroom").textContent = "₹0";
+        document.getElementById("rto").textContent = "₹0";
+        document.getElementById("insurance").textContent = "₹0";
+        document.getElementById("other").textContent = "₹2,500";
+        document.getElementById("totalPrice").textContent = "₹0";
+    }
+</script>
+
+</body>
+</html>
