@@ -499,6 +499,20 @@
       .input-edit { border: none; background: transparent; }
       select { border: none; appearance: none; font-weight: 700; background: transparent; }
     }
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      min-height: 100dvh;
+      margin: 0;
+      padding: 0;
+    }
+    .receipt, .section, .modal-content {
+      min-height: 120px;
+      contain: layout style;
+    }
+    input, select, textarea {
+      font-size: 16px !important;
+    }
   </style>
 </head>
 <body>
@@ -741,18 +755,118 @@
       "WAGON -R": "https://i.ibb.co/ZRGQxSnF/Wagon-R.avif"
     };
 
-    const dataset = [
-      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT LXI 1.2L 5MT", "ex": 649000.00, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
-      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.00, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
-      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 656500.00, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
-      { "category": "MARUTI BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.00, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
-      { "category": "MARUTI ERTIGA", "name": "MARUTI ERTIGA LXI 1.5L 5MT", "ex": 869000.00, "msp4": 14200.00, "msp5": 18500.00, "msp6": 21000.00 },
-      { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
-      { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.90, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
-      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
-      { "category": "EECO", "name": "MARUTI EECO 5 STR STD", "ex": 532000.00, "msp4": 6100.00, "msp5": 10200.00, "msp6": 11800.00 },
-      { "category": "VICTORIS", "name": "MARUTI VICTORIS STD 1.5L 5MT", "ex": 1099000.00, "msp4": 18200.00, "msp5": 22500.00, "msp6": 25100.00 }
+        const dataset = [
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 STD 1L 5MT", "ex": 370029.88, "reg": 35602.69, "ins": 26909.0, "kit": 5439.0, "msp4": 4424.82, "msp5": 7610.82, "msp6": 8318.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI 1L 5MT", "ex": 400029.02, "reg": 38302.61, "ins": 29104.0, "kit": 5439.0, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI 1L 5MT", "ex": 452529.58, "reg": 43027.66, "ins": 30974.0, "kit": 5439.0, "msp4": 5250.82, "msp5": 9144.82, "msp6": 10088.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI+ 1L 5MT", "ex": 500029.3, "reg": 47302.64, "ins": 32045.0, "kit": 5439.0, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI 1L AGS", "ex": 497530.06, "reg": 47077.71, "ins": 31838.0, "kit": 5439.0, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI+ 1L AGS", "ex": 545029.78, "reg": 51352.68, "ins": 33910.0, "kit": 5439.0, "msp4": 6194.82, "msp5": 10796.82, "msp6": 11976.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 LXI CNG 1L 5MT", "ex": 484530.0, "reg": 45907.7, "ins": 32708.0, "kit": 5439.0, "msp4": 5604.82, "msp5": 9734.82, "msp6": 10678.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI ALTO K10 VXI CNG 1L 5MT", "ex": 534528.96, "reg": 50407.61, "ins": 34572.0, "kit": 5439.0, "msp4": 6076.82, "msp5": 10560.82, "msp6": 11740.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI TOUR H1 1L 5MT", "ex": 400029.02, "reg": 28000.0, "ins": 34500.0, "kit": 5439.0, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
+      { "category": "NEW ALTO K10", "name": "MARUTI TOUR H1 CNG 1L 5MT", "ex": 484530.0, "reg": 28000.0, "ins": 37500.0, "kit": 5439.0, "msp4": 5604.82, "msp5": 9734.82, "msp6": 10678.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO LXI 1L ISS 5MT", "ex": 470058.9, "reg": 44605.3, "ins": 29222.0, "kit": 6098.0, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO VXI 1L ISS 5MT", "ex": 518559.26, "reg": 48970.33, "ins": 32707.0, "kit": 6098.0, "msp4": 5958.82, "msp5": 10324.82, "msp6": 11386.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO VXI CNG 1L 5MT", "ex": 598059.4, "reg": 56125.35, "ins": 37332.0, "kit": 6098.0, "msp4": 6784.82, "msp5": 11740.82, "msp6": 13038.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO VXI 1L ISS AGS", "ex": 563558.56, "reg": 53020.27, "ins": 34628.0, "kit": 6098.0, "msp4": 6430.82, "msp5": 11150.82, "msp6": 12330.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI 1L ISS 5MT", "ex": 573559.06, "reg": 53920.32, "ins": 36983.0, "kit": 6098.0, "msp4": 6548.82, "msp5": 11386.82, "msp6": 12566.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI 1L ISS AGS", "ex": 618559.54, "reg": 57970.36, "ins": 36846.0, "kit": 6098.0, "msp4": 7020.82, "msp5": 12212.82, "msp6": 13510.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI+ 1L ISS 5MT", "ex": 630558.96, "reg": 59050.31, "ins": 38346.0, "kit": 6098.0, "msp4": 7138.82, "msp5": 12330.82, "msp6": 13746.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI CELERIO ZXI+ 1L ISS AGS", "ex": 672558.74, "reg": 62830.29, "ins": 39311.0, "kit": 6098.0, "msp4": 7610.82, "msp5": 13215.82, "msp6": 14690.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI TOUR H3 1L ISS 5MT", "ex": 470058.9, "reg": 28000.0, "ins": 36000.0, "kit": 6098.0, "msp4": 5486.82, "msp5": 9380.82, "msp6": 10442.82 },
+      { "category": "NEW CELERIO", "name": "MARUTI TOUR H3 CNG 1L 5MT", "ex": 554558.9, "reg": 28000.0, "ins": 40500.0, "kit": 6098.0, "msp4": 6312.82, "msp5": 10914.82, "msp6": 12094.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO STD 1L ISS 5MT", "ex": 399530.0, "reg": 38257.7, "ins": 26909.0, "kit": 6309.0, "msp4": 4778.82, "msp5": 8082.82, "msp6": 8908.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO LXI 1L ISS 5MT", "ex": 429529.72, "reg": 40957.67, "ins": 30206.0, "kit": 6309.0, "msp4": 5014.82, "msp5": 8672.82, "msp6": 9557.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI 1L ISS 5MT", "ex": 465529.38, "reg": 44197.64, "ins": 31050.0, "kit": 6309.0, "msp4": 5368.82, "msp5": 9380.82, "msp6": 10324.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI+ 1L ISS 5MT", "ex": 500530.12, "reg": 47347.71, "ins": 32062.0, "kit": 6309.0, "msp4": 5722.82, "msp5": 9970.82, "msp6": 11032.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI 1L ISS AGS", "ex": 510529.92, "reg": 48247.69, "ins": 32398.0, "kit": 6309.0, "msp4": 5840.82, "msp5": 10206.82, "msp6": 11268.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI+ 1L ISS AGS", "ex": 545529.66, "reg": 51397.67, "ins": 33927.0, "kit": 6309.0, "msp4": 6194.82, "msp5": 10796.82, "msp6": 11976.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO LXI CNG 1L 5MT", "ex": 514029.0, "reg": 48562.61, "ins": 34181.0, "kit": 6309.0, "msp4": 5899.82, "msp5": 10265.82, "msp6": 11327.82 },
+      { "category": "S-PRESSO", "name": "MARUTI S-PRESSO VXI CNG 1L 5MT", "ex": 550029.66, "reg": 51802.67, "ins": 35084.0, "kit": 6309.0, "msp4": 6253.82, "msp5": 10914.82, "msp6": 12094.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR LXI 1L ISS 5MT", "ex": 524558.88, "reg": 49510.3, "ins": 31215.0, "kit": 8092.0, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR VXI 1L ISS 5MT", "ex": 569559.34, "reg": 53560.34, "ins": 34827.0, "kit": 8092.0, "msp4": 6489.82, "msp5": 11268.82, "msp6": 12448.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR LXI CNG 1L 5MT", "ex": 619559.18, "reg": 58060.33, "ins": 38048.0, "kit": 8092.0, "msp4": 7020.82, "msp5": 12212.82, "msp6": 13510.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR VXI 1L ISS AGS", "ex": 614559.1, "reg": 57610.32, "ins": 36622.0, "kit": 8092.0, "msp4": 6961.82, "msp5": 12094.82, "msp6": 13392.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR VXI CNG 1L 5MT", "ex": 664559.56, "reg": 62110.36, "ins": 39599.0, "kit": 8092.0, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR ZXI 1.2L ISS 5MT", "ex": 589558.84, "reg": 55360.29, "ins": 35246.0, "kit": 8092.0, "msp4": 6725.82, "msp5": 11622.82, "msp6": 12920.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR ZXI+ 1.2L ISS 5MT", "ex": 632559.3, "reg": 59230.34, "ins": 38415.0, "kit": 8092.0, "msp4": 7138.82, "msp5": 12448.82, "msp6": 13864.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR ZXI 1.2L ISS AGS", "ex": 634559.6, "reg": 59410.36, "ins": 37286.0, "kit": 8092.0, "msp4": 7197.82, "msp5": 12448.82, "msp6": 13864.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR ZXI+ 1.2L ISS AGS", "ex": 677559.06, "reg": 63280.32, "ins": 39480.0, "kit": 8092.0, "msp4": 7669.82, "msp5": 13333.82, "msp6": 14808.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR ZXI+ DUAL TONE 1.2L ISS 5MT", "ex": 644558.8, "reg": 60310.29, "ins": 38827.0, "kit": 8092.0, "msp4": 7256.82, "msp5": 12684.82, "msp6": 14100.82 },
+      { "category": "WAGON -R", "name": "MARUTI WAGONR ZXI+ DUAL TONE 1.2L ISS AGS", "ex": 689559.56, "reg": 64360.36, "ins": 39893.0, "kit": 8092.0, "msp4": 7787.82, "msp5": 13569.82, "msp6": 15044.82 },
+      { "category": "WAGON -R", "name": "MARUTI TOUR H3 1L ISS 5MT", "ex": 524558.88, "reg": 28000.0, "ins": 37000.0, "kit": 8092.0, "msp4": 6076.82, "msp5": 10442.82, "msp6": 11504.82 },
+      { "category": "WAGON -R", "name": "MARUTI TOUR H3 CNG 1L 5MT", "ex": 609059.0, "reg": 28000.0, "ins": 42000.0, "kit": 8092.0, "msp4": 6843.82, "msp5": 11976.82, "msp6": 13274.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT LXI 1.2L 5MT", "ex": 649000.0, "reg": 60710.0, "ins": 35389.0, "kit": 9850.0, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI 1.2L 5MT", "ex": 729500.0, "reg": 67955.0, "ins": 38161.0, "kit": 9850.0, "msp4": 8200.82, "msp5": 14336.82, "msp6": 15988.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI (O) 1.2L 5MT", "ex": 756500.0, "reg": 70385.0, "ins": 39091.0, "kit": 9850.0, "msp4": 8554.82, "msp5": 14926.82, "msp6": 16578.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI 1.2L AGS", "ex": 779500.0, "reg": 72455.0, "ins": 39883.0, "kit": 9850.0, "msp4": 8789.82, "msp5": 15339.82, "msp6": 17050.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI (O) 1.2L AGS", "ex": 806500.0, "reg": 74885.0, "ins": 40813.0, "kit": 9850.0, "msp4": 9084.82, "msp5": 15870.82, "msp6": 17640.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI 1.2L 5MT", "ex": 829500.0, "reg": 76955.0, "ins": 41605.0, "kit": 9850.0, "msp4": 9320.82, "msp5": 16283.82, "msp6": 18112.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI 1.2L AGS", "ex": 879500.0, "reg": 81455.0, "ins": 43327.0, "kit": 9850.0, "msp4": 9851.82, "msp5": 17227.82, "msp6": 19233.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI+ 1.2L 5MT", "ex": 899500.0, "reg": 83255.0, "ins": 44016.0, "kit": 9850.0, "msp4": 10087.82, "msp5": 17640.82, "msp6": 19646.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI+ DUAL TONE 1.2L 5MT", "ex": 914500.0, "reg": 84605.0, "ins": 44532.0, "kit": 9850.0, "msp4": 10264.82, "msp5": 17935.82, "msp6": 19999.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI+ 1.2L AGS", "ex": 949500.0, "reg": 87755.0, "ins": 45737.0, "kit": 9850.0, "msp4": 10618.82, "msp5": 18584.82, "msp6": 20767.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI+ DUAL TONE 1.2L AGS", "ex": 964500.0, "reg": 89105.0, "ins": 46253.0, "kit": 9850.0, "msp4": 10854.82, "msp5": 18997.82, "msp6": 21121.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI CNG 1.2L 5MT", "ex": 819500.0, "reg": 76055.0, "ins": 41261.0, "kit": 9850.0, "msp4": 9202.82, "msp5": 16106.82, "msp6": 17935.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT VXI (O) CNG 1.2L 5MT", "ex": 846500.0, "reg": 78485.0, "ins": 42191.0, "kit": 9850.0, "msp4": 9556.82, "msp5": 16637.82, "msp6": 18525.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI SWIFT ZXI CNG 1.2L 5MT", "ex": 919500.0, "reg": 85055.0, "ins": 44704.0, "kit": 9850.0, "msp4": 10323.82, "msp5": 18053.82, "msp6": 20118.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI TOUR S 1.2L 5MT", "ex": 651000.0, "reg": 28000.0, "ins": 38000.0, "kit": 9850.0, "msp4": 7374.82, "msp5": 12802.82, "msp6": 14218.82 },
+      { "category": "EPIC NEW SWIFT", "name": "MARUTI TOUR S CNG 1.2L 5MT", "ex": 736000.0, "reg": 28000.0, "ins": 42000.0, "kit": 9850.0, "msp4": 8200.82, "msp5": 14336.82, "msp6": 15988.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE LXI 1.2L 5MT", "ex": 679000.0, "reg": 63410.0, "ins": 36422.0, "kit": 9850.0, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI 1.2L 5MT", "ex": 779000.0, "reg": 72410.0, "ins": 39865.0, "kit": 9850.0, "msp4": 8554.82, "msp5": 14926.82, "msp6": 16578.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI 1.2L AGS", "ex": 824000.0, "reg": 76460.0, "ins": 41415.0, "kit": 9850.0, "msp4": 9084.82, "msp5": 15870.82, "msp6": 17640.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI 1.2L 5MT", "ex": 889000.0, "reg": 82310.0, "ins": 43653.0, "kit": 9850.0, "msp4": 9851.82, "msp5": 17227.82, "msp6": 19233.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI 1.2L AGS", "ex": 934000.0, "reg": 86360.0, "ins": 45202.0, "kit": 9850.0, "msp4": 10323.82, "msp5": 18053.82, "msp6": 20118.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI+ 1.2L 5MT", "ex": 969000.0, "reg": 89510.0, "ins": 46408.0, "kit": 9850.0, "msp4": 10618.82, "msp5": 18584.82, "msp6": 20767.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI+ 1.2L AGS", "ex": 1014000.0, "reg": 93560.0, "ins": 47957.0, "kit": 9850.0, "msp4": 11150.82, "msp5": 19528.82, "msp6": 21829.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE VXI CNG 1.2L 5MT", "ex": 874000.0, "reg": 80960.0, "ins": 43137.0, "kit": 9850.0, "msp4": 9615.82, "msp5": 16814.82, "msp6": 18761.82 },
+      { "category": "Dazzling New Dzire", "name": "MARUTI DZIRE ZXI CNG 1.2L 5MT", "ex": 984000.0, "reg": 90860.0, "ins": 46924.0, "kit": 9850.0, "msp4": 10854.82, "msp5": 18997.82, "msp6": 21121.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO 5 STR STD 1.2L 5MT", "ex": 532000.0, "reg": 50180.0, "ins": 30883.0, "kit": 6372.0, "msp4": 6135.82, "msp5": 10560.82, "msp6": 11740.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO 7 STR STD 1.2L 5MT", "ex": 561000.0, "reg": 52790.0, "ins": 31920.0, "kit": 6372.0, "msp4": 6489.82, "msp5": 11150.82, "msp6": 12330.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO 5 STR AC 1.2L 5MT", "ex": 574000.0, "reg": 53960.0, "ins": 32385.0, "kit": 6372.0, "msp4": 6607.82, "msp5": 11386.82, "msp6": 12684.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO 5 STR AC CNG 1.2L 5MT", "ex": 658000.0, "reg": 61520.0, "ins": 35389.0, "kit": 6372.0, "msp4": 7492.82, "msp5": 12920.82, "msp6": 14454.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO AMBULANCE H1 1.2L 5MT", "ex": 827000.0, "reg": 76730.0, "ins": 41433.0, "kit": 6372.0, "msp4": 9320.82, "msp5": 16283.82, "msp6": 18112.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO CARGO 1.2L 5MT", "ex": 542000.0, "reg": 32000.0, "ins": 34500.0, "kit": 6372.0, "msp4": 6253.82, "msp5": 10796.82, "msp6": 11976.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO CARGO CNG 1.2L 5MT", "ex": 627000.0, "reg": 32000.0, "ins": 38000.0, "kit": 6372.0, "msp4": 7138.82, "msp5": 12330.82, "msp6": 13746.82 },
+      { "category": "EECO NEW", "name": "MARUTI EECO CARGO AC CNG 1.2L 5MT", "ex": 674000.0, "reg": 32000.0, "ins": 40500.0, "kit": 6372.0, "msp4": 7610.82, "msp5": 13215.82, "msp6": 14690.82 },
+      { "category": "EECO NEW", "name": "MARUTI TOUR V 5 STR STD 1.2L 5MT", "ex": 529000.0, "reg": 28000.0, "ins": 35000.0, "kit": 6372.0, "msp4": 6135.82, "msp5": 10560.82, "msp6": 11740.82 },
+      { "category": "EECO NEW", "name": "MARUTI TOUR V 7 STR STD 1.2L 5MT", "ex": 558000.0, "reg": 28000.0, "ins": 36000.0, "kit": 6372.0, "msp4": 6430.82, "msp5": 11032.82, "msp6": 12212.82 },
+      { "category": "EECO NEW", "name": "MARUTI TOUR V 5 STR AC 1.2L 5MT", "ex": 571000.0, "reg": 28000.0, "ins": 37000.0, "kit": 6372.0, "msp4": 6607.82, "msp5": 11386.82, "msp6": 12684.82 },
+      { "category": "EECO NEW", "name": "MARUTI TOUR V 5 STR AC CNG 1.2L 5MT", "ex": 655000.0, "reg": 28000.0, "ins": 40000.0, "kit": 6372.0, "msp4": 7433.82, "msp5": 12920.82, "msp6": 14336.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA LXI 1.5L 5MT", "ex": 834000.0, "reg": 77360.0, "ins": 41761.0, "kit": 11317.0, "msp4": 13923.82, "msp5": 17227.82, "msp6": 19233.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA VXI 1.5L 5MT", "ex": 970000.0, "reg": 89600.0, "ins": 46443.0, "kit": 11317.0, "msp4": 16047.82, "msp5": 19882.82, "msp6": 22183.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA VXI 1.5L 6AT", "ex": 1110000.0, "reg": 102200.0, "ins": 51261.0, "kit": 11317.0, "msp4": 18289.82, "msp5": 22596.82, "msp6": 25192.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI 1.5L 5MT", "ex": 1114500.0, "reg": 102605.0, "ins": 51415.0, "kit": 11317.0, "msp4": 18348.82, "msp5": 22714.82, "msp6": 25310.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI DUAL TONE 1.5L 5MT", "ex": 1130500.0, "reg": 104045.0, "ins": 51966.0, "kit": 11317.0, "msp4": 18584.82, "msp5": 23068.82, "msp6": 25664.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI 1.5L 6AT", "ex": 1254500.0, "reg": 115205.0, "ins": 56233.0, "kit": 11317.0, "msp4": 20531.82, "msp5": 25428.82, "msp6": 28378.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI DUAL TONE 1.5L 6AT", "ex": 1270500.0, "reg": 116645.0, "ins": 56784.0, "kit": 11317.0, "msp4": 20826.82, "msp5": 25782.82, "msp6": 28732.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ 1.5L 5MT", "ex": 1258000.0, "reg": 115520.0, "ins": 56354.0, "kit": 11317.0, "msp4": 20590.82, "msp5": 25546.82, "msp6": 28496.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ DUAL TONE 1.5L 5MT", "ex": 1274000.0, "reg": 116960.0, "ins": 56905.0, "kit": 11317.0, "msp4": 20885.82, "msp5": 25841.82, "msp6": 28850.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ 1.5L 6AT", "ex": 1398000.0, "reg": 128120.0, "ins": 61173.0, "kit": 11317.0, "msp4": 22832.82, "msp5": 28319.82, "msp6": 31564.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI+ DUAL TONE 1.5L 6AT", "ex": 1414000.0, "reg": 129560.0, "ins": 61723.0, "kit": 11317.0, "msp4": 23068.82, "msp5": 28614.82, "msp6": 31918.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA LXI CNG 1.5L 5MT", "ex": 929000.0, "reg": 85910.0, "ins": 45032.0, "kit": 11317.0, "msp4": 15398.82, "msp5": 19115.82, "msp6": 21357.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA VXI CNG 1.5L 5MT", "ex": 1065000.0, "reg": 98150.0, "ins": 49712.0, "kit": 11317.0, "msp4": 17581.82, "msp5": 21770.82, "msp6": 24307.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI CNG 1.5L 5MT", "ex": 1210000.0, "reg": 111200.0, "ins": 54702.0, "kit": 11317.0, "msp4": 19882.82, "msp5": 24602.82, "msp6": 27434.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI BREZZA ZXI CNG DUAL TONE 1.5L 5MT", "ex": 1226000.0, "reg": 112640.0, "ins": 55252.0, "kit": 11317.0, "msp4": 20118.82, "msp5": 24897.82, "msp6": 27788.82 },
+      { "category": "NEW BREZZA", "name": "MARUTI URBANO LXI 1.5L 5MT", "ex": 858500.0, "reg": 79565.0, "ins": 42604.0, "kit": 11317.0, "msp4": 14277.82, "msp5": 17700.0, "msp6": 19764.0 },
+      { "category": "NEW BREZZA", "name": "MARUTI URBANO VXI 1.5L 5MT", "ex": 998000.0, "reg": 92120.0, "ins": 47407.0, "kit": 11317.0, "msp4": 16519.82, "msp5": 20472.0, "msp6": 22832.0 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA LXI (O) 1.5L 5MT", "ex": 884000.0, "reg": 81860.0, "ins": 43481.0, "kit": 10565.0, "msp4": 14690.82, "msp5": 18230.82, "msp6": 20354.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA VXI (O) 1.5L 5MT", "ex": 993000.0, "reg": 91670.0, "ins": 47235.0, "kit": 10565.0, "msp4": 16401.82, "msp5": 20354.82, "msp6": 22714.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA ZXI (O) 1.5L 5MT", "ex": 1103000.0, "reg": 101570.0, "ins": 51020.0, "kit": 10565.0, "msp4": 18171.82, "msp5": 22478.82, "msp6": 25074.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA ZXI+ 1.5L 5MT", "ex": 1173000.0, "reg": 107870.0, "ins": 53429.0, "kit": 10565.0, "msp4": 19292.82, "msp5": 23894.82, "msp6": 26608.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA VXI (O) 1.5L 6AT", "ex": 1133000.0, "reg": 104270.0, "ins": 52052.0, "kit": 10565.0, "msp4": 18643.82, "msp5": 23068.82, "msp6": 25723.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA ZXI (O) 1.5L 6AT", "ex": 1243000.0, "reg": 114170.0, "ins": 55837.0, "kit": 10565.0, "msp4": 20354.82, "msp5": 25192.82, "msp6": 28083.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA ZXI+ 1.5L 6AT", "ex": 1313000.0, "reg": 120470.0, "ins": 58245.0, "kit": 10565.0, "msp4": 21475.82, "msp5": 26608.82, "msp6": 29676.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA VXI (O) CNG 1.5L 5MT", "ex": 1088000.0, "reg": 100220.0, "ins": 50503.0, "kit": 10565.0, "msp4": 17935.82, "msp5": 22183.82, "msp6": 24720.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI ERTIGA ZXI (O) CNG 1.5L 5MT", "ex": 1198000.0, "reg": 110120.0, "ins": 54288.0, "kit": 10565.0, "msp4": 19705.82, "msp5": 24366.82, "msp6": 27198.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI TOUR M 1.5L 5MT", "ex": 993000.0, "reg": 28000.0, "ins": 53000.0, "kit": 10565.0, "msp4": 16401.82, "msp5": 20354.82, "msp6": 22714.82 },
+      { "category": "NEW ERTIGA", "name": "MARUTI TOUR M CNG 1.5L 5MT", "ex": 1088000.0, "reg": 28000.0, "ins": 56000.0, "kit": 10565.0, "msp4": 17935.82, "msp5": 22183.82, "msp6": 24720.82 },
+      { "category": "VICTORIS", "name": "MARUTI VICTORIS LXI 1.5L 5MT", "ex": 1099000.0, "reg": 101210.0, "ins": 50882.0, "kit": 11500.0, "msp4": 18200.0, "msp5": 22500.0, "msp6": 25100.0 },
+      { "category": "VICTORIS", "name": "MARUTI VICTORIS VXI 1.5L 5MT", "ex": 1225000.0, "reg": 112550.0, "ins": 55217.0, "kit": 11500.0, "msp4": 20100.0, "msp5": 24900.0, "msp6": 27800.0 },
+      { "category": "VICTORIS", "name": "MARUTI VICTORIS ZXI 1.5L 5MT", "ex": 1395000.0, "reg": 127850.0, "ins": 61068.0, "kit": 11500.0, "msp4": 22800.0, "msp5": 28300.0, "msp6": 31500.0 }
     ];
+
 
     let selectedWarranty = '6';
     let selectedRto = 'UP53';
@@ -839,48 +953,87 @@
     }
 
     function calculatePrices() {
-      const selectedVariantName = document.getElementById('variantSelect').value;
-      const variantData = dataset.find(item => item.name === selectedVariantName);
+    const variantSelect = document.getElementById('variantSelect');
+    if (!variantSelect) return;
+    
+    const selectedVariantName = variantSelect.value;
+    const datasetArray = typeof dataset !== 'undefined' ? dataset : [];
+    const variantData = datasetArray.find(item => item.name === selectedVariantName);
 
-      if (!variantData) return;
+    if (!variantData) return;
 
-      document.getElementById('displayModelName').innerText = variantData.category;
-      document.getElementById('displayVariantName').innerText = variantData.name;
+    // Model & Variant Name update
+    const modelNameEl = document.getElementById('displayModelName');
+    const variantNameEl = document.getElementById('displayVariantName');
+    if (modelNameEl) modelNameEl.innerText = variantData.category || '';
+    if (variantNameEl) variantNameEl.innerText = variantData.name || '';
 
-      const exShowroom = variantData.ex || 0;
-      document.getElementById('exShowroomVal').innerText = '₹' + exShowroom.toLocaleString('en-IN');
+    const exShowroom = variantData.ex || 0;
+    const exShowroomValEl = document.getElementById('exShowroomVal');
+    if (exShowroomValEl) exShowroomValEl.innerText = '₹' + exShowroom.toLocaleString('en-IN');
 
-      const isInsuranceChecked = document.getElementById('chkInsurance').checked;
-      const insurance = isInsuranceChecked ? (parseFloat(document.getElementById('insuranceVal').value) || 0) : 0;
+    // Helper function to safely get values if checkbox is checked
+    const getCheckedValue = (chkId, valId) => {
+        const chk = document.getElementById(chkId);
+        const val = document.getElementById(valId);
+        if (chk && chk.checked && val) {
+            return parseFloat(val.value) || 0;
+        }
+        return 0;
+    };
 
-      const registration = parseFloat(document.getElementById('registrationVal').value) || 0;
-      
-      const isKitChecked = document.getElementById('chkKit').checked;
-      const kit = isKitChecked ? (parseFloat(document.getElementById('kitVal').value) || 0) : 0;
+    const insurance = getCheckedValue('chkInsurance', 'insuranceVal');
+    
+    const regEl = document.getElementById('registrationVal');
+    const registration = regEl ? (parseFloat(regEl.value) || 0) : 0;
+    
+    const kit = getCheckedValue('chkKit', 'kitVal');
+    const fastag = getCheckedValue('chkFastag', 'fastagVal');
+    const rewards = getCheckedValue('chkRewards', 'rewardsVal');
 
-      const isFastagChecked = document.getElementById('chkFastag').checked;
-      const fastag = isFastagChecked ? (parseFloat(document.getElementById('fastagVal').value) || 0) : 0;
-
-      const isRewardsChecked = document.getElementById('chkRewards').checked;
-      const rewards = isRewardsChecked ? (parseFloat(document.getElementById('rewardsVal').value) || 0) : 0;
-
-      let warrantyCost = 0;
-      if (selectedWarranty === '6') warrantyCost = variantData.msp6 || 0;
-      else if (selectedWarranty === '5') warrantyCost = variantData.msp5 || 0;
-      else if (selectedWarranty === '4') warrantyCost = variantData.msp4 || 0;
-
-      document.getElementById('warrantyVal').innerText = '₹' + warrantyCost.toLocaleString('en-IN');
-
-      const tcs = exShowroom > 1000000 ? exShowroom * 0.01 : 0;
-      document.getElementById('tcsVal').innerText = '₹' + Math.round(tcs).toLocaleString('en-IN');
-
-      const discount = parseFloat(document.getElementById('discountVal').value) || 0;
-
-      const grandTotal = exShowroom + insurance + registration + kit + fastag + rewards + warrantyCost + tcs - discount;
-      document.getElementById('grandTotalVal').innerText = '₹' + Math.round(grandTotal).toLocaleString('en-IN');
-
-      document.querySelectorAll('.input-edit').forEach(adjustWidth);
+    let warrantyCost = 0;
+    if (typeof selectedWarranty !== 'undefined') {
+        if (selectedWarranty === '6') warrantyCost = variantData.msp6 || 0;
+        else if (selectedWarranty === '5') warrantyCost = variantData.msp5 || 0;
+        else if (selectedWarranty === '4') warrantyCost = variantData.msp4 || 0;
     }
+
+    const warrantyValEl = document.getElementById('warrantyVal');
+    if (warrantyValEl) warrantyValEl.innerText = '₹' + warrantyCost.toLocaleString('en-IN');
+
+    const tcs = exShowroom > 1000000 ? exShowroom * 0.01 : 0;
+    const tcsValEl = document.getElementById('tcsVal');
+    if (tcsValEl) tcsValEl.innerText = '₹' + Math.round(tcs).toLocaleString('en-IN');
+
+    const discountEl = document.getElementById('discountVal');
+    const discount = discountEl ? (parseFloat(discountEl.value) || 0) : 0;
+
+    const grandTotal = exShowroom + insurance + registration + kit + fastag + rewards + warrantyCost + tcs - discount;
+    
+    const grandTotalValEl = document.getElementById('grandTotalVal');
+    if (grandTotalValEl) grandTotalValEl.innerText = '₹' + Math.round(grandTotal).toLocaleString('en-IN');
+
+    if (typeof adjustWidth === 'function') {
+        document.querySelectorAll('.input-dev, .input-edit').forEach(adjustWidth);
+    }
+}
+
+// Automatic Live Update Event Listeners (Page Load Hone Par)
+document.addEventListener('DOMContentLoaded', function() {
+    const fieldsToWatch = [
+        'variantSelect', 'chkInsurance', 'insuranceVal', 
+        'registrationVal', 'chkKit', 'kitVal', 
+        'chkFastag', 'fastagVal', 'chkRewards', 'rewardsVal', 'discountVal'
+    ];
+
+    fieldsToWatch.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            const eventType = (el.tagName === 'SELECT' || el.type === 'checkbox') ? 'change' : 'input';
+            el.addEventListener(eventType, calculatePrices);
+        }
+    });
+});
 
     function resetForm() {
       document.getElementById('discountVal').value = 0;
@@ -976,6 +1129,49 @@
         }, 'image/png');
       });
     }
+    // Checkbox ke check/uncheck hone par rate ko 0 ya default karne ka function
+function setupCheckboxToggle(checkboxId, inputId, defaultRate) {
+    const checkbox = document.getElementById(checkboxId);
+    const inputField = document.getElementById(inputId);
+
+    if (!checkbox || !inputField) return;
+
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            // Jab check ho, toh default rate wapas aa jaye (aap apne hisab se value set kar sakte hain)
+            inputField.value = defaultRate;
+        } else {
+            // Jab uncheck ho, toh rate bilkul '0' ho jaye
+            inputField.value = 0;
+        }
+        // Price calculation ko dobara run karein taaki total live update ho
+        calculatePrices();
+    });
+
+    // Input box me khud type karne par bhi total change ho
+    inputField.addEventListener('input', calculatePrices);
+}
+
+// Page load hone par inhein activate karein (Yahan apne default rates daal sakte hain jaise 15000, 5000 etc.)
+document.addEventListener('DOMContentLoaded', function() {
+    // Variant change hone par
+    const variantSelect = document.getElementById('variantSelect');
+    if (variantSelect) {
+        variantSelect.addEventListener('change', calculatePrices);
+    }
+
+    // Registration aur Discount ke liye input event
+    ['registrationVal', 'discountVal'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', calculatePrices);
+    });
+
+    // Checkboxes ke liye (Checkbox ID, Input ID, aur unka Default Rate)
+    setupCheckboxToggle('chkInsurance', 'insuranceVal', 28500); // Insurance ka default rate
+    setupCheckboxToggle('chkKit', 'kitVal', 10000);             // Kit ka default rate
+    setupCheckboxToggle('chkFastag', 'fastagVal', 600);           // Fastag ka default rate
+    setupCheckboxToggle('chkRewards', 'rewardsVal', 885);           // Rewards ka default rate
+});
   </script>
 </body>
 </html>
