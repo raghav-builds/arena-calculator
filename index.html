@@ -202,12 +202,12 @@
       justify-content: center !important;
       pointer-events: none !important;
       z-index: 0 !important;
-      opacity: 0.30 !important;
+      opacity: 0.50 !important;
     }
 
     .watermark-container svg {
-      width: 75% !important;
-      max-height: 75% !important;
+      width: 65% !important;
+      max-height: 65% !important;
       object-fit: contain !important;
     }
 
@@ -1105,6 +1105,8 @@ document.addEventListener('DOMContentLoaded', function() {
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
+        windowWidth: 1024,
+        windowHeight: 1536,
         onclone: (clonedDoc) => {
           prepareCloneForExport(clonedDoc);
         }
@@ -1126,6 +1128,8 @@ document.addEventListener('DOMContentLoaded', function() {
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
+        windowWidth: 1024,
+        windowHeight: 1536,
         onclone: (clonedDoc) => {
           prepareCloneForExport(clonedDoc);
         }
