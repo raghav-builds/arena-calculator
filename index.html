@@ -533,16 +533,16 @@ select {
     gap: 8px;
     max-width: 450px;
   }
-  /* =========================================================
-   SHARE IMAGE — EXACT 9:16 RATIO (1080 x 1920 px)
+ /* =========================================================
+   SHARE IMAGE — 9:16 RATIO (1080 x 1920 px)
    ========================================================= */
 .capturing{
   width:1080px !important;
   height:1920px !important;
   min-width:1080px !important;
   min-height:1920px !important;
-  max-width:1080px !important;
-  max-height:1920px !important;
+  max-width:none !important;
+  max-height:none !important;
   margin:0 !important;
   padding:0 !important;
   overflow:hidden !important;
@@ -554,19 +554,411 @@ select {
   font-family:'Inter',Arial,sans-serif !important;
 }
 
-/* Footer positioning for 1920px height canvas */
-.capturing ~ #referenceShareFooter{
-  display:none !important;
-  position:absolute !important;
-  left:0 !important;
-  top:1660px !important;
-  width:1080px !important;
-  height:260px !important;
-  box-sizing:border-box !important;
-  padding:0 44px !important;
+/* Header */
+.capturing .capture-brand{
+  display:flex !important;
+  height:84px !important;
+  min-height:84px !important;
+  padding:18px 48px 8px !important;
+  align-items:flex-start !important;
+  justify-content:space-between !important;
+  border:0 !important;
   background:#fff !important;
+}
+.capturing .capture-brand .ms-brand{
+  margin-top:8px !important;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:22px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  letter-spacing:.01em !important;
+  color:#071C2E !important;
+}
+.capturing .capture-brand .ARENA-brand{
+  font-family:Georgia,serif !important;
+  font-size:34px !important;
+  line-height:.9 !important;
+  letter-spacing:.25em !important;
+  color:#071C2E !important;
+}
+.capturing .capture-brand .price-list-tag{
+  display:block !important;
+  margin-top:8px !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  letter-spacing:.20em !important;
+  color:#78858E !important;
+}
+
+/* Tagline */
+.capturing .capture-slogan{
+  display:block !important;
+  height:52px !important;
+  min-height:52px !important;
+  padding:4px 48px 8px !important;
+  background:#fff !important;
+  color:#536570 !important;
+  font-family:Georgia,serif !important;
+  font-size:12px !important;
+  line-height:1.5 !important;
+  letter-spacing:.22em !important;
+  text-align:left !important;
+  white-space:nowrap !important;
+}
+.capturing .capture-slogan:after{
+  content:"" !important;
+  display:block !important;
+  width:60px !important;
+  height:2px !important;
+  margin-top:8px !important;
+  background:#163E5B !important;
+}
+
+/* Hero: model left, vehicle photo right */
+.capturing .receipt-head{
+  position:relative !important;
+  height:240px !important;
+  min-height:240px !important;
+  padding:10px 48px 20px !important;
+  display:grid !important;
+  grid-template-columns:42% 58% !important;
+  align-items:center !important;
+  gap:0 !important;
+  border-bottom:4px solid #163E5B !important;
+  background:#fff !important;
+}
+.capturing .receipt-head:after{display:none !important}
+.capturing .receipt-head > div{
+  grid-column:1 !important;
+  grid-row:1 !important;
+  align-self:center !important;
+  min-width:0 !important;
+}
+.capturing .receipt-head .model-photo{
+  grid-column:2 !important;
+  grid-row:1 !important;
+  width:100% !important;
+  height:220px !important;
+  max-width:600px !important;
+  justify-self:end !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  background:#fff !important;
+  border:0 !important;
+  border-radius:0 !important;
+  margin:0 !important;
+}
+.capturing .receipt-head .model-name{
+  margin:0 0 12px !important;
+  color:#071C2E !important;
+  font-family:Georgia,serif !important;
+  font-size:46px !important;
+  line-height:.98 !important;
+  font-weight:700 !important;
+  letter-spacing:.01em !important;
+  text-transform:uppercase !important;
+}
+.capturing .receipt-head .variant-name{
+  margin:0 !important;
+  color:#294E68 !important;
+  font-family:'Inter',Arial,sans-serif !important;
+  font-size:20px !important;
+  line-height:1.3 !important;
+  font-weight:600 !important;
+}
+
+/* Four benefit columns */
+.capturing .capture-benefits{
+  display:flex !important;
+  height:98px !important;
+  min-height:98px !important;
+  padding:16px 48px 14px !important;
+  align-items:center !important;
+  justify-content:space-around !important;
+  gap:0 !important;
+  background:#fff !important;
+  color:#263F51 !important;
+  border-bottom:1px solid #D7E0E6 !important;
+  font-family:'Inter',Arial,sans-serif !important;
+  font-size:12px !important;
+  line-height:1.35 !important;
+  letter-spacing:.07em !important;
+  text-align:left !important;
+  font-weight:800 !important;
+}
+.capturing .capture-benefits span{
+  flex:1 !important;
+  min-width:0 !important;
+  padding-left:24px !important;
+  border-left:1px solid #CBD7DF !important;
+}
+.capturing .capture-benefits span:first-child{
+  border-left:0 !important;
+  padding-left:0 !important;
+}
+
+/* Table header */
+.capturing .capture-table-head{
+  display:grid !important;
+  grid-template-columns:9% 66% 25% !important;
+  height:60px !important;
+  min-height:60px !important;
+  margin:0 48px !important;
+  padding:0 !important;
+  align-items:center !important;
+  background:#0B1F28 !important;
+  color:#fff !important;
+  border:1px solid #000 !important;
+  border-radius:3px 3px 0 0 !important;
+  box-sizing:border-box !important;
+  font-size:17px !important;
+  font-weight:800 !important;
+}
+.capturing .capture-table-head span{
+  height:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  box-sizing:border-box !important;
+  padding:0 18px !important;
+  border-color:#000 !important;
+}
+.capturing .capture-table-head span:first-child{
+  justify-content:center !important;
+  border-right:1px solid #000 !important;
+}
+.capturing .capture-table-head span:nth-child(2){
+  justify-content:flex-start !important;
+  border-right:1px solid #000 !important;
+}
+.capturing .capture-table-head span:last-child{
+  justify-content:flex-end !important;
+}
+
+/* Price rows & spacing for 1920 height */
+.capturing .line-items{
+  padding:0 48px !important;
+  margin:0 !important;
+  background:#fff !important;
+  border-left:1px solid #000 !important;
+  border-right:1px solid #000 !important;
+  box-sizing:border-box !important;
+}
+.capturing .line-items > .item{
+  position:relative !important;
+  min-height:76px !important;
+  display:grid !important;
+  grid-template-columns:9% 66% 25% !important;
+  padding:10px 0 !important;
+  box-sizing:border-box !important;
+  border-top:1px solid #000 !important;
+  border-bottom:0 !important;
+  align-items:center !important;
+}
+.capturing .line-items > .item:last-child{
+  border-bottom:1px solid #000 !important;
+}
+.capturing .line-items > .item:after{
+  content:"" !important;
+  position:absolute !important;
+  top:0 !important;
+  bottom:0 !important;
+  left:9% !important;
+  width:1px !important;
+  background:#000 !important;
+}
+.capturing .line-items > .item:before{
+  grid-column:1 !important;
+  grid-row:1 !important;
+  align-self:center !important;
+  text-align:center !important;
+  color:#263946 !important;
+  font-size:16px !important;
+  font-weight:600 !important;
+}
+.capturing .line-items > .item .item-left{
+  grid-column:2 !important;
+  grid-row:1 !important;
+  min-width:0 !important;
+  padding-left:22px !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  align-items:center !important;
+}
+.capturing .line-items > .item .item-amt{
+  grid-column:3 !important;
+  grid-row:1 !important;
+  border-left:1px solid #000 !important;
+  height:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  box-sizing:border-box !important;
+  padding-right:18px !important;
+  white-space:nowrap !important;
+  color:#101820 !important;
+  font-size:21px !important;
+  font-weight:800 !important;
+}
+.capturing .line-items > .item.base .item-amt{
+  color:#173F5B !important;
+  font-size:23px !important;
+}
+.capturing .item-name{
+  color:#141B21 !important;
+  font-size:20px !important;
+  line-height:1.2 !important;
+  font-weight:500 !important;
+}
+.capturing .item-name .sub{
+  display:block !important;
+  margin-top:5px !important;
+  color:#687884 !important;
+  font-size:14px !important;
+  line-height:1.2 !important;
+  font-weight:400 !important;
+}
+.capturing .chk{
+  width:26px !important;
+  height:26px !important;
+  margin-right:16px !important;
+  flex:none !important;
+}
+.capturing .reg-toggle,
+.capturing .wpills{
+  margin-top:10px !important;
+}
+.capturing .rpill,
+.capturing .wpill{
+  min-height:42px !important;
+  padding:10px 14px !important;
+  border-radius:4px !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+}
+
+/* Offer Block */
+.capturing .offer-block{
+  height:92px !important;
+  min-height:92px !important;
+  margin:0 48px !important;
+  padding:0 !important;
+  display:grid !important;
+  grid-template-columns:9% 66% 25% !important;
+  grid-template-rows:1fr !important;
+  align-items:center !important;
+  box-sizing:border-box !important;
+  background:#E8F1F5 !important;
+  border:1px solid #000 !important;
+  border-radius:0 0 4px 4px !important;
+}
+.capturing .offer-block .offer-label{
+  grid-column:1 / 3 !important;
+  grid-row:1 !important;
+  align-self:center !important;
+  margin:0 !important;
+  padding-left:30px !important;
+  font-size:19px !important;
+  font-weight:800 !important;
   color:#0B1F28 !important;
-  font-family:Arial,sans-serif !important;
+  white-space:nowrap !important;
+}
+.capturing .offer-deduct{
+  grid-column:3 !important;
+  grid-row:1 !important;
+  display:block !important;
+  visibility:visible !important;
+  align-self:center !important;
+  text-align:right !important;
+  padding-right:18px !important;
+  color:#D9534F !important;
+  font-size:22px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  white-space:nowrap !important;
+}
+.capturing .offer-row{
+  display:none !important;
+  visibility:hidden !important;
+}
+
+/* Total Block */
+.capturing .total-block{
+  display:flex !important;
+  height:102px !important;
+  min-height:102px !important;
+  margin:12px 48px 0 !important;
+  padding:0 26px !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  background:#163E5B !important;
+  border:1px solid #000 !important;
+  border-radius:4px !important;
+}
+.capturing .total-label{
+  color:#fff !important;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:24px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  letter-spacing:.03em !important;
+}
+.capturing .total-amt{
+  color:#fff !important;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:44px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+}
+.capturing .total-sub{
+  display:none !important;
+}
+
+/* Footer (Bottom section of 1920px height canvas) */
+.capturing .receipt-foot{
+  display:block !important;
+  box-sizing:border-box !important;
+  height:260px !important;
+  min-height:260px !important;
+  padding:24px 48px 0 !important;
+  margin:16px 0 0 !important;
+  background:#fff !important;
+  border:0 !important;
+  color:#0B1F28 !important;
+}
+.capturing .ref-footer-main{
+  height:150px !important;
+  display:grid !important;
+  grid-template-columns:50% 50% !important;
+  align-items:start !important;
+}
+.capturing .ref-footer-person{
+  height:110px !important;
+  box-sizing:border-box !important;
+  padding:24px 24px 0 !important;
+}
+.capturing .ref-footer-dealer{
+  height:110px !important;
+  box-sizing:border-box !important;
+  padding:24px 10px 0 28px !important;
+  border-left:1px solid #6C747A !important;
+  text-align:center !important;
+}
+.capturing .capture-bottom-rule{
+  display:block !important;
+  width:100% !important;
+  height:2px !important;
+  margin:10px 0 0 !important;
+  background:#0B1F28 !important;
+}
+.capturing .capture-bottom-tagline{
+  display:block !important;
+  margin:16px 0 0 !important;
+  text-align:center !important;
+  font-family:Georgia,serif !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  letter-spacing:.28em !important;
+  color:#455A67 !important;
 }
   </style>
 </head>
