@@ -1081,6 +1081,21 @@ document.addEventListener('DOMContentLoaded', function() {
         clonedCard.style.borderTop = '10px solid #0A2540';
       }
 
+      // --- FIX: html2canvas ke liye CSS Grid ko Flex me convert karna ---
+      const grids = clonedDoc.querySelectorAll('.model-grid');
+      grids.forEach(grid => {
+        grid.style.display = 'flex';
+        grid.style.flexWrap = 'wrap';
+        grid.style.gap = '8px';
+        
+        // Grid ke andar ke items ko barabar 2 columns me set karne ke liye
+        const children = grid.children;
+        for (let child of children) {
+          child.style.flex = '1 1 48%';
+          child.style.boxSizing = 'border-box';
+        }
+      });
+
       const selects = clonedDoc.querySelectorAll('select');
       selects.forEach(sel => {
         const div = clonedDoc.createElement('div');
@@ -1105,8 +1120,8 @@ document.addEventListener('DOMContentLoaded', function() {
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
-        windowWidth: 1024,
-        windowHeight: 2200,
+        windowWidth: 1080,
+        windowHeight: 1920,
         onclone: (clonedDoc) => {
           prepareCloneForExport(clonedDoc);
         }
@@ -1128,8 +1143,8 @@ document.addEventListener('DOMContentLoaded', function() {
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
-        windowWidth: 1024,
-        windowHeight: 2200,
+        windowWidth: 1080,
+        windowHeight: 1920,
         onclone: (clonedDoc) => {
           prepareCloneForExport(clonedDoc);
         }
