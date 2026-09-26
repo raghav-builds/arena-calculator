@@ -202,12 +202,12 @@
       justify-content: center !important;
       pointer-events: none !important;
       z-index: 0 !important;
-      opacity: 0.08 !important;
+      opacity: 0.30 !important;
     }
 
     .watermark-container svg {
-      width: 65% !important;
-      max-height: 65% !important;
+      width: 75% !important;
+      max-height: 75% !important;
       object-fit: contain !important;
     }
 
@@ -513,6 +513,26 @@
     input, select, textarea {
       font-size: 16px !important;
     }
+select {
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 15px;
+    font-family: 'Inter', sans-serif; 
+    font-size: 13px;
+    font-weight: 600; 
+    border: 1px solid var(--line); 
+    border-radius: 4px;
+    background: #fff; 
+    color: #1E2B37;
+    /* Yahan se appearance: none; hata diya hai taaki default arrow wapas aa jaye */
+  }
+
+  .model-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    max-width: 450px;
+  }
   </style>
 </head>
 <body>
@@ -541,7 +561,7 @@
   <!-- Top Controls -->
   <div class="no-print-controls">
     <div>
-      <h2 style="font-size: 16px; font-weight: 800; color: var(--primary);">Maruti Suzuki Arena Price Calculator</h2>
+      <h2 style="font-size: 16px; font-weight: 800; color: var(--primary);">Maruti Suzuki Arena</h2>
       <p style="font-size: 11px; color: var(--text-muted);">Professional Quotation Layout</p>
     </div>
     <div class="btn-group">
@@ -742,6 +762,7 @@
   </div>
 
   <script>
+    
     const realCarCDNImages = {
       "Dazzling New Dzire": "https://i.ibb.co/v7XF9Jc/Dazzling-New-Dzire.avif",
       "EECO": "https://i.ibb.co/MDSc0CQx/EECO.avif",
@@ -1172,6 +1193,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupCheckboxToggle('chkFastag', 'fastagVal', 600);           // Fastag ka default rate
     setupCheckboxToggle('chkRewards', 'rewardsVal', 885);           // Rewards ka default rate
 });
+
   </script>
 </body>
 </html>
