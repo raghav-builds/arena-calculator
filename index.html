@@ -960,6 +960,24 @@ select {
   letter-spacing:.28em !important;
   color:#455A67 !important;
 }
+/* Mobile screen ke liye automatic scaling fix */
+@media screen and (max-width: 768px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    background: #f0f2f5;
+  }
+    /* Jab capturing class na ho (normal mobile view me dekhne ke liye) */
+  .capturing:not(.is-capturing) {
+    transform: scale(0.32); /* Screen size ke hisab se scale adjust karein */
+    transform-origin: top center;
+    margin-top: -650px; /* Extra space ko balance karne ke liye */
+  }
+}
   </style>
 </head>
 <body>
